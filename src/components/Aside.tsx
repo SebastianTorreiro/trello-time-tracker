@@ -1,7 +1,19 @@
+import { useState } from "react";
+import BoardOptions from "./BoardOptions";
+import BoardWrapper from "./BoardWrapper";
 import { Avatar } from "./ui/avatar";
 import { Separator } from "./ui/separator";
-import { FolderKanban } from "lucide-react";
+import { Ellipsis, FolderKanban, Plus } from "lucide-react";
 const Aside = () => {
+  // let [setBoards, boards] = useState([
+  //   { name: "tablero 1", id: 1 },
+  //   { name: "tablero 2", id: 2 },
+  // ]);
+
+  const boards = [
+    { name: "Tablero 1", id: 1 },
+    { name: "Tablero 2", id: 2 },
+  ];
   const name: string = "Sebastian Torreiro";
   return (
     <aside id="aside" className="w-full bg-muted h-screen ">
@@ -20,21 +32,38 @@ const Aside = () => {
       <Separator />
 
       <div id="boards">
-        <div id="title" className="flex gap-2 p-4">
-          <FolderKanban />
-          <h2>Tableros</h2>
-        </div> 
-
-          <div id="board-container">
-            <div>
-              <h3>Tablero 1</h3>
+        <div id="title" className="p-4">
+          <BoardWrapper id="board-title">
+            <div className="flex gap-1">
+              <FolderKanban />
+              <h2 className="font-medium">Tableros</h2>
             </div>
 
-            <div>
-              <h3>Tablero 2</h3>
-            </div>
-          </div>
+            <BoardOptions>
+              <Plus />
+            </BoardOptions>
+          </BoardWrapper>
         </div>
+
+        <div className="w-3/4 pl-4">
+          <Separator />
+        </div>
+
+        <div id="board-container" className="py-4 flex flex-col ">
+          {boards
+            ? boards.map((board) => (
+                <div key={board.id} className="px-4 py-1 hover:bg-muted-foreground">
+                  <BoardWrapper  id={`board-${board.name}`}>
+                    <h3 >{board.name}</h3>
+                    <BoardOptions>
+                      <Ellipsis />
+                    </BoardOptions>
+                  </BoardWrapper>
+                </div>
+              ))
+            : ""}
+        </div>
+      </div>
     </aside>
   );
 };

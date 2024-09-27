@@ -14,7 +14,11 @@ function App() {
           <Aside />
         </div>
         <Separator orientation="vertical" />
-        <div id="content" className="basis-2/3 lg:basis-3/4 xl:basis-4/5"></div>
+        <div id="content" className="basis-2/3 lg:basis-3/4 xl:basis-4/5">
+        
+          
+        
+        </div>
       </main>
     </>
   );
